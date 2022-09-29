@@ -26,18 +26,17 @@ folders = (
     ),
 )
 
-for folder in folders:
-    local_folder = folder[0]
+for local_folder, drive_folder in folders:
 
     if not os.path.exists(local_folder):
         os.mkdir(local_folder)
 
     local_file_names = os.listdir(local_folder)
 
-    drive_folder = folder[1]
     drive_files = drive.ListFile(
         {"q": f"'{drive_folder}' in parents and trashed=false"}
     ).GetList()  # lists all the files in the drive folder
+
     drive_file_names = [
         f"{file['title']}.{file['mimeType'].split('/')[-1]}" for file in drive_files
     ]
