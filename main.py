@@ -6,26 +6,32 @@ drive = GoogleDrive(GoogleAuth())
 # needs client_secrets.json from google cloud to authorize
 user = os.getlogin()
 
+base_folder = f"C:/Users/{user}/Documents/memes/"
+
+if not os.path.exists(base_folder):
+    os.mkdir(base_folder)
+
 folders = (
     (
-        f"C:/Users/{user}/Documents/memes/image/",
-        "",  # drive url for the respective folder
+        f"{base_folder}image/",
+        "1Yh9VM4WmgANL1Jr4ffMKJ0nLjsDhot1q",  # drive url for the respective folder
     ),
     (
-        f"C:/Users/{user}/Documents/memes/video/",
-        "",  # drive url for the respective folder
+        f"{base_folder}video/",
+        "18PO69jkS_EOcRe01E1Z3-PxhoYlyLFp2",  # drive url for the respective folder
     ),
     (
-        f"C:/Users/{user}/Documents/memes/reaction/",
-        "",  # drive url for the respective folder
+        f"{base_folder}reaction/",
+        "1oSXrlXuoOR8M3vs4zznk--AlEQEarfrq",  # drive url for the respective folder
     ),
 )
 
 for folder in folders:
-    if not os.path.exists(folder):
-        os.mkdir(folder)
-
     local_folder = folder[0]
+
+    if not os.path.exists(local_folder):
+        os.mkdir(local_folder)
+
     local_file_names = os.listdir(local_folder)
 
     drive_folder = folder[1]
@@ -44,6 +50,7 @@ for folder in folders:
                 }
             )
             drive_file.GetContentFile(local_folder + file_name)
+            print(f"downloaded '{file_name}'")
 
     for file in local_file_names:
         if file not in drive_file_names:
@@ -52,3 +59,6 @@ for folder in folders:
             )
             drive_file.SetContentFile(local_folder + file)
             drive_file.Upload()
+            print(f"uploaded '{file}'")
+
+os.system("pause")
