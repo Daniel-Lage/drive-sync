@@ -6,30 +6,18 @@ drive = GoogleDrive(GoogleAuth())
 # needs client_secrets.json from google cloud to authorize
 user = os.getlogin()
 
-base_folder = f"C:/Users/{user}/Documents/memes/"
+base_folder = f"C:/Users/{user}/REST OF DIRECTORY"
 
-if not os.path.exists(base_folder):
-    os.mkdir(base_folder)
-
-folders = (
-    (
-        f"{base_folder}image/",
-        "1Yh9VM4WmgANL1Jr4ffMKJ0nLjsDhot1q",  # drive url for the respective folder
-    ),
-    (
-        f"{base_folder}video/",
-        "18PO69jkS_EOcRe01E1Z3-PxhoYlyLFp2",  # drive url for the respective folder
-    ),
-    (
-        f"{base_folder}reaction/",
-        "1oSXrlXuoOR8M3vs4zznk--AlEQEarfrq",  # drive url for the respective folder
-    ),
+local_folders = ( 
+    f"{base_folder}/EXAMPLE", # folder in local machine
 )
+drive_folders = (
+    "RANDOM NUMBERS", # respective folder in google drive
+)  
 
-for local_folder, drive_folder in folders:
-
+for local_folder, drive_folder in zip(local_folders,drive_folders):
     if not os.path.exists(local_folder):
-        os.mkdir(local_folder)
+        os.makedirs(local_folder)
 
     local_file_names = os.listdir(local_folder)
 
