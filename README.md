@@ -1,4 +1,4 @@
-# meme-updater
+# drive sync
 uploads and downloads memes from your google drive
 
 program that checks folders from your machine and google drive, uploads files that are present in your machine and not in the drive and downloading those that are in the drive and not your machine.
